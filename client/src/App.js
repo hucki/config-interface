@@ -4,7 +4,7 @@ import { Dashboard } from './components/dashboard';
 function App() {
   return (
     <>
-      <header className="">dd</header>
+      <header className="App-header">UI Config</header>
       <Dashboard />
     </>
   );

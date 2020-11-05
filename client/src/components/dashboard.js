@@ -8,11 +8,15 @@ const initialState = {
   },
   error: null
 }
+const initialConfig = {
+  tools: [],
+  enableZoom: true // default setting
+}
 
 export const Dashboard = () => {
   const [state , setState] = useState(initialState)
-
   const {status, options, error} = state;
+  const {newConfig, setNewConfig} = useState(initialConfig)
 
 
   useEffect(() => {
@@ -31,13 +35,41 @@ export const Dashboard = () => {
       )
   }, [state])
 
+  const handleConfigSave = (event) => {
+    event.preventDefault();
+    alert('saved');
+  }
   const isLoading = status === 'loading';
   const isSuccess = status === 'success';
   const isError = status === 'error';
+  const tools = options.tools.map(tool => <option value={tool}>{tool}</option>)
   return (
     <>
-      <div>{state.status}</div>
-      <div>{isSuccess ? options.tools.map(tool => <div>{tool}</div>) : isError ? 'Error while retrieving options' : isLoading ? 'Loading Data' : null}</div>
+    {
+      isLoading
+        ? <div>Loading Data ... </div>
+        : isError
+          ? <div>Error while loading data</div>
+          : isSuccess
+            ? <form onSubmit={handleConfigSave}>
+                <div>
+                  <label htmlFor="tools">Please select your UI Tools</label>
+                </div>
+                <div>
+                  <select name="tools" id="tools" multiple>
+                    {tools}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="enableZoom">Enable Zoom function?</label>
+                  <input type="checkbox" name="enableZoom" id="enableZoom" ></input>
+                </div>
+                <div>
+                  <button className="form-save" type="submit">Save</button>
+                </div>
+              </form>
+            : <div>unhandled exception</div>
+    }
     </>
   );
 }
