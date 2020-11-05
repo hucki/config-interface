@@ -45,7 +45,10 @@ export const Dashboard = () => {
   const isSuccess = status === 'success';
   const isError = status === 'error';
 
-  const tools = options.tools.map(tool => <option value={tool}>{tool}</option>)
+  const tools = options.tools.map(tool => {
+    return <option value={tool} /*selected={newConfig.tools.indexOf(tools) !== -1}*/>{tool}</option>
+  });
+
   return (
     <>
     {
