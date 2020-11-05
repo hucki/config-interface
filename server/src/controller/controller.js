@@ -11,7 +11,7 @@ exports.saveConfig = async(req, res) => {
   try {
     const configuration = await Configuration.create({
       tools: req.body.tools,
-      defaultZoom: req.body.defaultZoom
+      enableZoom: req.body.enableZoom
     });
     res.status(201);
     res.send(configuration);
