@@ -4,6 +4,7 @@
   "description": "This Project provides a basic interface for configuring following UI Options::",
   "main": "index.js",
   "scripts": {
+    "preinstall": "(cd server && npm install); (cd client && npm install)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

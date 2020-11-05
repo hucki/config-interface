@@ -20,7 +20,7 @@ export const Dashboard = () => {
 
 
   useEffect(() => {
-    if (options.tools?.length) return
+    if (status !== 'idle') return
     setState(({status, options, error}) => ({status: 'loading', options, error}));
       apiClient('default/tools',{}).then(
         data => {
@@ -29,7 +29,7 @@ export const Dashboard = () => {
           setState(({status, options, error}) => ({status: 'error', options, error: error}));
         }
       )
-  }, [state])
+  }, [status, options, error])
 
   const handleConfigSave = (event) => {
     event.preventDefault();
